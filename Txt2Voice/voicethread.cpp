@@ -172,7 +172,7 @@ void VoiceThread::run()
         memset(array,0,sizeof(array));
         str.toWCharArray(array);
         pVoice->SetRate(rate);
-        pVoice->Speak( array/*L"玩呗德阳麻将玩法规则-2018.08.15"*/, 0, NULL);
+        pVoice->Speak( array, 0, NULL);
     }
     qDebug()<<"END";
 

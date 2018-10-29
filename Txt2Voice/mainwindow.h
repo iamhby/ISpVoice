@@ -15,26 +15,34 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void dospeak(QString beginText = "");
 public slots:
-    void onStart(bool v);
-    void onPause(bool v);
-    void onAdd();
-    void OnDec();
+    void onStart();
+    void onPause();
+    void OnAddRate();
+    void OnDecRate();
     void OnStop();
     void OnClose();
-    void OnSpeed();
+    void OnSkip();
 
     void TrayIconAction(QSystemTrayIcon::ActivationReason reason);
+
+    void OnSpeakDone();
 private:
     //最小化到托盘----
     void changeEvent(QEvent *e);
     void closeEvent(QCloseEvent *event);
 private:
     VoiceThread myT;
+    WaitThread  waitthread;
     QSystemTrayIcon *tray;
     QMenu* menu;
     QAction * reset;
     QAction*quit;
+
+    QFile file;
+    bool bPause;
+    bool bStop;
 };
 
 #endif // MAINWINDOW_H

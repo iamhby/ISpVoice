@@ -28,4 +28,18 @@ protected:
     int speedsize;
 };
 
+
+
+class WaitThread : public QThread
+{
+    Q_OBJECT
+public:
+    WaitThread();
+    ~WaitThread();
+signals:
+    void Speakdone();
+protected:
+    void run();
+};
+
 #endif // VOICETHREAD_H

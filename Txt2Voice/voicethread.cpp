@@ -119,7 +119,7 @@ void VoiceThread::stop()
 
 void VoiceThread::speed(int size)
 {
-    speedsize += size;
+    speedsize += 512;
 }
 
 void VoiceThread::run()
@@ -134,7 +134,7 @@ void VoiceThread::run()
         return;
 
     file.seek(0);
-    static wchar_t array[4986]={0};
+    static wchar_t array[1024]={0};
     bool bfind = false;
     while(!file.atEnd())
     {
@@ -154,7 +154,7 @@ void VoiceThread::run()
             jump = false;
         }
 
-        QByteArray line = file.readLine(4986);
+        QByteArray line = file.readLine(1024);
         QString str(line);
         if(!bfind &&  -1 == str.indexOf(text))
         {
@@ -179,4 +179,21 @@ void VoiceThread::run()
     pVoice->Release();
    //千万不要忘记：
    ::CoUninitialize();
+}
+
+/////////////////////////////
+WaitThread::WaitThread()
+{
+
+}
+
+WaitThread::~WaitThread()
+{
+
+}
+
+void WaitThread::run()
+{
+    pVoice->WaitUntilDone(INFINITE);
+    emit Speakdone();
 }
